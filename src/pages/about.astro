@@ -1,17 +1,55 @@
----
 
+---
+import '../styles/global.css';
+const pageTitle = "关于我";
+const identity = {
+  firstName: "莎拉",
+  country: "加拿大",
+  occupation: "技术撰稿人",
+  hobbies: ["摄影", "观鸟", "棒球"],
+};
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+const skillColor = "navy";
+const fontWeight = 'blod';
+const textCase = 'uppercase'
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About Page</title>
-	</head>
-	<body>
-		<a href="/">首页</a>
-		<h1>About Page</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>About Page</title>
+  </head>
+  <style define:vars={{skillColor, fontWeight, textCase}}>
+    h1 {
+      color: purple;
+      font-size: 4rem;
+    }
+    .skill {
+		color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform:var(--textCase);
+    }
+  </style>
+  <body>
+    <a href="/">首页</a>
+    <h1>{pageTitle}</h1>
+    <ul>
+      <li>我的名字是{identity.firstName}.</li>
+      <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            我的两个习惯：{identity.hobbies[0]}和{identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>我的技能是：</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+  </body>
 </html>
